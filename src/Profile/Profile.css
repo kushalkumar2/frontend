@@ -1,0 +1,85 @@
+/* Main container */
+.mainpro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #f0f4f8; /* Light background */
+  font-family: Arial, sans-serif;
+}
+
+/* Profile card */
+.pro {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 400px;
+}
+
+/* Heading */
+.proh1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333333;
+}
+
+/* Form */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between each input group */
+}
+
+/* Input group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.label_pro {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555555;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Input focus effect */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.4);
+}
+
+/* Optional: add a submit button */
+button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
