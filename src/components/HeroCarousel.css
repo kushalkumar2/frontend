@@ -1,0 +1,78 @@
+.hero-carousel-container {
+  width: 90%;
+  margin: 20px auto;
+  height: 70vh; /* Adjust height as needed */
+  background-color: #000; /* Fallback for image loading */
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  color: #fff; /* White text for the overlay */
+
+  /* Center slide content vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Needed for absolute positioning of content */
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7); /* Darken the image a bit so text is readable */
+}
+
+/* This is the text and button overlay */
+.slide-content {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.slide-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.slide-content p {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.shop-now-btn {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shop-now-btn:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* --- Swiper Navigation & Pagination Customization --- */
+:root {
+  --swiper-navigation-color: #ffffff;
+  --swiper-pagination-color: #ffffff;
+}

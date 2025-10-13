@@ -1,0 +1,88 @@
+/* Main Navbar Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+  /* height: 70px; A fixed height for the navbar */
+}
+
+/* --- Left Section --- */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Space between menu icon and logo */
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* --- Middle Section --- */
+.navbar-middle {
+  flex-grow: 1; /* Allows the middle section to take up available space */
+  display: flex;
+  justify-content: center; /* Centers the search bar within the middle section */
+  padding: 0 2rem; /* Adds some space on the sides */
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Set a max-width for the search bar */
+}
+
+.search-container .search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px 10px 10px 40px; /* Left padding to make space for the icon */
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #f7f7f7;
+  font-size: 0.9rem;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* --- Right Section --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Space between icons */
+}
+
+/* Common style for all icon buttons */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #000000;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+  .navbar-middle {
+    display: none; /* Hide search bar on smaller screens */
+  }
+
+  .navbar {
+    padding: 1rem;
+  }
+}
