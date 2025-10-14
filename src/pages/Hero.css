@@ -1,0 +1,162 @@
+/* --- Global Styles for this component --- */
+.homepage-content {
+  padding: 4rem 0;
+  background-color: #ffffff;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+/* --- Common Buttons --- */
+.shop-btn, .shop-btn-small, .add-to-cart-btn {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #000;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shop-btn:hover, .shop-btn-small:hover, .add-to-cart-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.shop-btn-small { padding: 8px 20px; font-size: 0.8rem; }
+
+/* --- 1 & 2. Feature Section Styling --- */
+.feature-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem auto; /* Bottom margin to separate sections */
+  padding: 0 2rem;
+}
+
+.feature-image, .feature-text {
+  flex: 1; /* Each takes up 50% of the space */
+}
+
+.feature-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.feature-text h2 {
+  text-align: left;
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* This is the key for the alternating layout! */
+.feature-section.text-left {
+  flex-direction: row-reverse;
+}
+
+/* --- 3. Shop by Category Section --- */
+.category-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem auto;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.category-item {
+  text-align: center;
+}
+
+.category-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+.category-item:hover img {
+    transform: scale(1.03);
+}
+
+.category-item h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+/* --- 4. Trending Products Section --- */
+.trending-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trending-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  text-align: left;
+  background-color: #ffffff;
+}
+
+.product-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .feature-section {
+    flex-direction: column !important; /* Stack on mobile, !important overrides inline style */
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .feature-text h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .feature-text {
+    text-align: center;
+  }
+}
