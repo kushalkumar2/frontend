@@ -9,6 +9,16 @@ import { categoryData } from '../data/categoryData';
 import { trendingData } from '../data/trendingData';
 
 export default function Hero() {
+
+  const { addToCart } = useCart();
+  const featuredProduct = { 
+    id: 'hero-product-1', 
+    image: 'path/to/your/image.jpg', 
+    title: 'Featured Hoodie', 
+    price: 2499 
+  };
+
+
   return (
     <main className="homepage-content">
       {/* 1 & 2. Alternating Feature Sections */}
@@ -54,7 +64,7 @@ export default function Hero() {
               {/* 4. Use the function from the context */}
               <button
                 className="add-to-cart-btn"
-                onClick={() => addToCart(product.id)}
+                onClick={() => addToCart(featuredProduct.id)}
               >
                 ADD TO CART
               </button>

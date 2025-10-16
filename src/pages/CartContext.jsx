@@ -1,46 +1,69 @@
-import React, { createContext, useState, useContext } from 'react';
-import { trendingData } from '../data/trendingData'; // We'll get product data from here
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { allProducts } from '../data/allProducts';
 
-// 1. Create the Context
 const CartContext = createContext();
 
-// 2. Create a custom hook for easy access to the context
 export function useCart() {
   return useContext(CartContext);
 }
 
-// 3. Create the Provider component
+// Helper function to get initial cart state from localStorage
+const getInitialCart = () => {
+  const savedCart = localStorage.getItem('cartItems');
+  return savedCart ? JSON.parse(savedCart) : [];
+};
+
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+  // 1. Initialize state by calling our helper function
+  const [cartItems, setCartItems] = useState(getInitialCart);
 
-  // --- Core Cart Functions ---
+  // 2. This effect runs every time cartItems changes, saving it to localStorage
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // --- Core Cart Functions (these remain the same) ---
   const addToCart = (productId) => {
-    // Find the full product details from our data file
-    const product = trendingData.find(p => p.id === productId);
-    if (!product) return; // Do nothing if product not found
-
     const exist = cartItems.find((item) => item.id === productId);
     if (exist) {
-      // If item already exists, increase its quantity
       setCartItems(
         cartItems.map((item) =>
           item.id === productId ? { ...exist, quantity: exist.quantity + 1 } : item
         )
       );
     } else {
-      // If new, add it to the cart with quantity 1
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      const product = allProducts.find(p => p.id === productId);
+      if (product) {
+        setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      }
     }
   };
 
-  // --- Calculated Values ---
+  const removeFromCart = (productId) => {
+    setCartItems(cartItems.filter((item) => item.id !== productId));
+  };
+
+  const updateQuantity = (productId, amount) => {
+    setCartItems(
+      cartItems.map(item => {
+        if (item.id === productId) {
+          const newQuantity = item.quantity + amount;
+          return { ...item, quantity: newQuantity > 0 ? newQuantity : 1 };
+        }
+        return item;
+      }).filter(item => item.quantity > 0) // Optional: remove item if quantity becomes 0
+    );
+  };
+
+  // --- Calculated Values (these remain the same) ---
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cartItems.reduce((price, item) => price + item.quantity * item.price, 0);
 
-  // The value object that will be available to all consuming components
   const value = {
     cartItems,
     addToCart,
+    removeFromCart,
+    updateQuantity,
     cartItemCount,
     totalPrice
   };

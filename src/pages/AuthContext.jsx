@@ -1,5 +1,5 @@
-import React, { createContext, useState, useContext } from 'react';
-import AuthModal from '../components/AuthModal'; // 1. Import your modal component
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import AuthModal from '../components/AuthModal';
 
 const AuthContext = createContext();
 
@@ -8,26 +8,34 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null); // Will store the user's name
+  // 1. Initialize state by reading from localStorage
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('currentUser') || null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  // Function to be called from the Navbar to open the modal
-  const openAuthModal = () => setIsAuthModalOpen(true);
+  // 2. Add an effect that syncs localStorage whenever currentUser changes
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('currentUser', currentUser);
+    } else {
+      localStorage.removeItem('currentUser');
+    }
+  }, [currentUser]);
 
-  // Function to be passed to the modal to close it
+  const openAuthModal = () => setIsAuthModalOpen(true);
   const closeAuthModal = () => setIsAuthModalOpen(false);
 
-  // Function to be called by the modal on successful login/signup
+  // 3. This function is now perfect. It sets the state, and the useEffect handles localStorage.
   const handleLoginSuccess = (userName) => {
-    setCurrentUser(userName); // Set the logged-in user
+    setCurrentUser(userName);
   };
 
+  // 4. This logout function is also now perfect.
   const logout = () => {
-    setCurrentUser(null); // Clear the user on logout
+    setCurrentUser(null);
   };
 
   const value = {
-    isLoggedIn: !!currentUser, // A user is logged in if currentUser is not null
+    isLoggedIn: !!currentUser,
     currentUser,
     openAuthModal,
     logout,
@@ -36,8 +44,6 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={value}>
       {children}
-      {/* 2. Conditionally render the AuthModal here */}
-      {/* It's managed by the context, keeping App.js clean */}
       {isAuthModalOpen && (
         <AuthModal
           closeModal={closeAuthModal}

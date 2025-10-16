@@ -15,11 +15,29 @@
   text-align: center;
   font-size: 1.2rem;
   color: #555;
+  padding: 4rem 0;
+}
+
+.shop-now-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 12px 24px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.shop-now-link:hover {
+  opacity: 0.8;
 }
 
 .cart-container {
   display: flex;
   gap: 2rem;
+  align-items: flex-start;
 }
 
 .cart-items {
@@ -37,14 +55,16 @@
 }
 
 .cart-item img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   border-radius: 4px;
 }
 
 .item-details {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .item-details h3 {
@@ -52,9 +72,61 @@
   font-size: 1.1rem;
 }
 
-.item-price {
+.item-price-single {
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  width: fit-content;
+  border-radius: 6px;
+  margin-top: auto;
+}
+
+.quantity-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+.quantity-controls button:disabled {
+    cursor: not-allowed;
+    color: #ccc;
+}
+
+.quantity-controls span {
+  padding: 0.5rem 1rem;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  font-size: 1rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.item-actions {
+  text-align: right;
+}
+
+.item-price-total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #d93025;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
 }
 
 .cart-summary {
@@ -62,7 +134,8 @@
   border: 1px solid #eee;
   padding: 2rem;
   border-radius: 8px;
-  height: fit-content; /* Makes it not stretch full height */
+  position: sticky;
+  top: 100px; /* Sticks to the top while scrolling */
 }
 
 .cart-summary h2 {
@@ -100,5 +173,9 @@
 @media (max-width: 768px) {
   .cart-container {
     flex-direction: column;
+  }
+  .cart-summary {
+    position: static;
+    width: 100%;
   }
 }
