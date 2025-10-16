@@ -1,6 +1,9 @@
 import React from 'react';
 import './Hero.css'; // Don't forget the CSS file
 
+import { useCart } from '../pages/CartContext';
+
+
 import { featuredData } from '../data/featuredData';
 import { categoryData } from '../data/categoryData';
 import { trendingData } from '../data/trendingData';
@@ -47,12 +50,19 @@ export default function Hero() {
             <div key={product.id} className="product-card">
               <img src={product.image} alt={product.title} />
               <h3>{product.title}</h3>
-              <p>{product.price}</p>
-              <button className="add-to-cart-btn">ADD TO CART</button>
+              <p>₹{product.price}</p>
+              {/* 4. Use the function from the context */}
+              <button
+                className="add-to-cart-btn"
+                onClick={() => addToCart(product.id)}
+              >
+                ADD TO CART
+              </button>
             </div>
           ))}
         </div>
       </section>
+
     </main>
   );
 }

@@ -1,10 +1,12 @@
-import React from "react";
+import React from 'react';
+import { athleisureData } from '../data/athleisureData';
+import ProductGrid from '../components/ProductGrid';
 
 export default function AthleisurePage() {
   return (
-    <div style={{ padding: '4rem', textAlign: 'center' }}>
-      <h1>Athleisure Collection</h1>
-      <p>Products will be displayed here.</p>
+    <div className="page-container">
+      <h1 className="page-title">Athleisure</h1>
+      <ProductGrid products={athleisureData} />
     </div>
   );
 }

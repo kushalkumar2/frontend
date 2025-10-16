@@ -1,69 +1,53 @@
-    import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext } from 'react';
+import { trendingData } from '../data/trendingData'; // We'll get product data from here
 
-    const CartContext = createContext();
+// 1. Create the Context
+const CartContext = createContext();
 
-    export const useCart = () => {
-      return useContext(CartContext);
-    };
+// 2. Create a custom hook for easy access to the context
+export function useCart() {
+  return useContext(CartContext);
+}
 
-    export const CartProvider = ({ children }) => {
-      const [cartItems, setCartItems] = useState([]);
+// 3. Create the Provider component
+export function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState([]);
 
-      const addToCart = (product, quantity = 1) => {
-        setCartItems((prevItems) => {
-          const existingItem = prevItems.find((item) => item.id === product.id);
+  // --- Core Cart Functions ---
+  const addToCart = (productId) => {
+    // Find the full product details from our data file
+    const product = trendingData.find(p => p.id === productId);
+    if (!product) return; // Do nothing if product not found
 
-          if (existingItem) {
-            // If item already in cart, update quantity
-            return prevItems.map((item) =>
-              item.id === product.id
-                ? { ...item, quantity: item.quantity + quantity }
-                : item
-            );
-          } else {
-            // If new item, add to cart
-            return [...prevItems, { ...product, quantity }];
-          }
-        });
-      };
+    const exist = cartItems.find((item) => item.id === productId);
+    if (exist) {
+      // If item already exists, increase its quantity
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === productId ? { ...exist, quantity: exist.quantity + 1 } : item
+        )
+      );
+    } else {
+      // If new, add it to the cart with quantity 1
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
 
-      const removeFromCart = (productId) => {
-        setCartItems((prevItems) =>
-          prevItems.filter((item) => item.id !== productId)
-        );
-      };
+  // --- Calculated Values ---
+  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cartItems.reduce((price, item) => price + item.quantity * item.price, 0);
 
-      const updateCartItemQuantity = (productId, newQuantity) => {
-        setCartItems((prevItems) => {
-          if (newQuantity <= 0) {
-            return prevItems.filter((item) => item.id !== productId);
-          }
-          return prevItems.map((item) =>
-            item.id === productId
-              ? { ...item, quantity: newQuantity }
-              : item
-          );
-        });
-      };
+  // The value object that will be available to all consuming components
+  const value = {
+    cartItems,
+    addToCart,
+    cartItemCount,
+    totalPrice
+  };
 
-      const clearCart = () => {
-        setCartItems([]);
-      };
-
-      // Calculate total items and total price (optional, but very useful)
-      const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-      const totalPrice = cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
-
-
-      const value = {
-        cartItems,
-        addToCart,
-        removeFromCart,
-        updateCartItemQuantity,
-        clearCart,
-        totalItems,
-        totalPrice,
-      };
-
-      return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-    };
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+    </CartContext.Provider>
+  );
+}

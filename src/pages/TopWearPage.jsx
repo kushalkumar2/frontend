@@ -1,11 +1,13 @@
 import React from 'react';
+import { topwearData } from '../data/topwearData';
+import ProductGrid from '../components/ProductGrid';
 
 // A simple placeholder page
 export default function TopWearPage() {
   return (
-    <div style={{ padding: '4rem', textAlign: 'center' }}>
-      <h1>Topwear Collection</h1>
-      <p>Products will be displayed here.</p>
+    <div className="page-container">
+      <h1 className="page-title">Topwear</h1>
+      <ProductGrid products={topwearData} />
     </div>
   );
 }

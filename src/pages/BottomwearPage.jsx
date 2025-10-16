@@ -1,10 +1,12 @@
 import React from 'react';
+import { bottomwearData } from '../data/bottomwearData';
+import ProductGrid from '../components/ProductGrid';
 
 export default function BottomwearPage() {
   return (
-    <div style={{ padding: '4rem', textAlign: 'center' }}>
-      <h1>Bottomwear Collection</h1>
-      <p>Products will be displayed here.</p>
+    <div className="page-container">
+      <h1 className="page-title">Bottomwear</h1>
+      <ProductGrid products={bottomwearData} />
     </div>
   );
 }
