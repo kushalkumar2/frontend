@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCart } from '../pages/CartContext';
+import { Link } from 'react-router-dom'; // 1. Import Link
 import './ProductGrid.css';
 
 // This component displays a single product card
@@ -8,13 +9,16 @@ function ProductCard({ product }) {
 
   return (
     <div className="product-card">
-      <div className="product-image-container">
-        <img src={product.image} alt={product.title} className="product-image" />
-      </div>
-      <div className="product-info">
-        <h3 className="product-title">{product.title}</h3>
-        <p className="product-price">₹{product.price}</p>
-      </div>
+      {/* 2. Wrap the image and info in a Link component */}
+      <Link to={`/product/${product.id}`} className="product-card-link">
+        <div className="product-image-container">
+          <img src={product.image} alt={product.title} className="product-image" />
+        </div>
+        <div className="product-info">
+          <h3 className="product-title">{product.title}</h3>
+          <p className="product-price">₹{product.price}</p>
+        </div>
+      </Link>
       <button 
         className="add-to-cart-btn-grid" 
         onClick={() => addToCart(product.id)}
