@@ -1,0 +1,104 @@
+/* CategoryGrid.css - Premium Glass Style */
+
+/* Container */
+.category-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
+  padding: 60px 20px 20px 20px; /* Top padding separates it from Hero */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Link Wrapper */
+.category-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 600px; /* Tall Premium Height */
+  overflow: hidden;
+  text-decoration: none;
+}
+
+/* Image */
+.category-image-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.category-item:hover .category-image {
+  transform: scale(1.05);
+}
+
+/* --- THE GLASS OVERLAY FIX --- */
+.category-overlay {
+  position: absolute;
+  bottom: 10%; 
+  left: 50%;
+  transform: translateX(-50%); 
+  
+  /* 1. GLASS EFFECT */
+  background-color: rgba(255, 255, 255, 0.2); /* Very transparent */
+  backdrop-filter: blur(12px); /* Blurs the image behind the box */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  
+  /* 2. REMOVE BORDERS & RADIUS */
+  border: none;
+  border-radius: 0; /* Sharp corners */
+  
+  /* 3. Sizing & Text */
+  padding: 15px 40px;
+  min-width: 220px;
+  text-align: center;
+  transition: all 0.3s ease;
+  
+  /* Optional: Subtle white glow instead of border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.category-overlay span {
+  color: #fff; /* White text looks better on glass usually */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Shadow makes text readable */
+  
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Hover Effect: Box becomes slightly more solid */
+.category-item:hover .category-overlay {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 900px) {
+  .category-grid-container {
+    grid-template-columns: 1fr; /* Stack vertically */
+    gap: 15px;
+    padding: 20px 15px;
+  }
+
+  .category-item {
+    height: 450px; /* Shorter for mobile */
+  }
+  
+  /* On mobile, maybe make text darker or box more solid for readability? */
+  .category-overlay {
+     background-color: rgba(255, 255, 255, 0.85);
+     backdrop-filter: none;
+  }
+  
+  .category-overlay span {
+    color: #000;
+    text-shadow: none;
+  }
+}

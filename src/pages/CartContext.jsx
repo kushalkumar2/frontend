@@ -1,76 +1,77 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { allProducts } from '../data/allProducts';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { allProducts } from '../data/allProducts'; // Ensure you have this or remove if not using for lookup
 
 const CartContext = createContext();
 
-export function useCart() {
+export const useCart = () => {
   return useContext(CartContext);
-}
-
-// Helper function to get initial cart state from localStorage
-const getInitialCart = () => {
-  const savedCart = localStorage.getItem('cartItems');
-  return savedCart ? JSON.parse(savedCart) : [];
 };
 
-export function CartProvider({ children }) {
-  // 1. Initialize state by calling our helper function
-  const [cartItems, setCartItems] = useState(getInitialCart);
+export const CartProvider = ({ children }) => {
+  // Load cart from localStorage on start
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
-  // 2. This effect runs every time cartItems changes, saving it to localStorage
+  // Save to localStorage whenever cart changes
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
-  // --- Core Cart Functions (these remain the same) ---
+  // 1. ADD TO CART
   const addToCart = (productId) => {
-    const exist = cartItems.find((item) => item.id === productId);
-    if (exist) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === productId ? { ...exist, quantity: exist.quantity + 1 } : item
-        )
-      );
-    } else {
-      const product = allProducts.find(p => p.id === productId);
-      if (product) {
-        setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    setCart((prevCart) => {
+      // Check if item is already in cart
+      const existingItem = prevCart.find((item) => item.id === productId);
+
+      if (existingItem) {
+        // If yes, just increase quantity
+        return prevCart.map((item) =>
+          item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        // If no, find product details (assuming you have a product list to look up)
+        // Note: You might need to adjust how you find the product details based on your data structure
+        // For now, I'll assume you pass the full product object or we find it in 'allProducts'
+        const productDetails = allProducts.find(p => p.id === productId);
+        
+        if (!productDetails) return prevCart; // Safety check
+
+        return [...prevCart, { ...productDetails, quantity: 1 }];
       }
-    }
+    });
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+  // 2. REMOVE FROM CART
+  const removeFromCart = (id) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const updateQuantity = (productId, amount) => {
-    setCartItems(
-      cartItems.map(item => {
-        if (item.id === productId) {
-          const newQuantity = item.quantity + amount;
-          return { ...item, quantity: newQuantity > 0 ? newQuantity : 1 };
-        }
-        return item;
-      }).filter(item => item.quantity > 0) // Optional: remove item if quantity becomes 0
+  // 3. UPDATE QUANTITY
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity < 1) return; // Prevent going below 1
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
     );
   };
 
-  // --- Calculated Values (these remain the same) ---
-  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-  const totalPrice = cartItems.reduce((price, item) => price + item.quantity * item.price, 0);
+  // 4. CALCULATE TOTAL
+  const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+  // 5. ITEM COUNT (For Badge)
+  const cartItemCount = cart.reduce((count, item) => count + item.quantity, 0);
 
   const value = {
-    cartItems,
+    cart,
     addToCart,
     removeFromCart,
     updateQuantity,
-    cartItemCount,
-    totalPrice
+    cartTotal,
+    cartItemCount
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
-}
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};

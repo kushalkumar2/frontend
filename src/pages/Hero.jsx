@@ -1,78 +1,58 @@
 import React from 'react';
-import './Hero.css'; // Don't forget the CSS file
-
+import { Link } from 'react-router-dom';
 import { useCart } from '../pages/CartContext';
-
-
-import { featuredData } from '../data/featuredData';
-import { categoryData } from '../data/categoryData';
-import { trendingData } from '../data/trendingData';
+import { trendingData } from '../data/trendingData'; 
+import { IoHeartOutline } from 'react-icons/io5';
+import HeroSection from '../components/HeroSection';
+import CategoryGrid from '../components/CategoryGrid'; 
+import './Hero.css'; 
 
 export default function Hero() {
-
   const { addToCart } = useCart();
-  const featuredProduct = { 
-    id: 'hero-product-1', 
-    image: 'path/to/your/image.jpg', 
-    title: 'Featured Hoodie', 
-    price: 2499 
-  };
-
 
   return (
-    <main className="homepage-content">
-      {/* 1 & 2. Alternating Feature Sections */}
-      {featuredData.map((feature) => (
-        <section
-          key={feature.id}
-          className={`feature-section ${feature.layout === 'imageLeft' ? 'image-left' : 'text-left'}`}
-        >
-          <div className="feature-image">
-            <img src={feature.image} alt={feature.alt} />
+    <>
+      <HeroSection />
+      <CategoryGrid />
+
+      <main className="homepage-content">
+        <section className="trending-section">
+          
+          {/* --- PREMIUM HEADER UPGRADE --- */}
+          <div className="section-header">
+            <h2 className="section-title">Trending Now</h2>
+            <Link to="/topwear" className="view-all-link">View All</Link>
           </div>
-          <div className="feature-text">
-            <h2>{feature.title}</h2>
-            <p>{feature.description}</p>
-            <button className="shop-btn">{feature.buttonText}</button>
+          
+          <div className="trending-grid">
+            {trendingData.map((product) => (
+              <div key={product.id} className="product-card">
+                <Link to={`/product/${product.id}`} className="product-card-link">
+                  <div className="product-image-container">
+                    <img src={product.image} alt={product.title} className="product-image" />
+                    
+                    {/* Badge & Heart */}
+                    <span className="discount-badge">40% OFF</span>
+                    <button className="wishlist-btn" onClick={(e) => {
+                      e.preventDefault();
+                    }}>
+                      <IoHeartOutline size={20} />
+                    </button>
+                  </div>
+                  
+                  <div className="product-info">
+                    <h3 className="product-title">{product.title}</h3>
+                    <div className="price-row">
+                      <span className="original-price">₹{Math.floor(product.price * 1.4)}</span>
+                      <span className="sale-price">₹{product.price}</span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
-      ))}
-
-      {/* 3. Shop by Category Section */}
-      <section className="category-section">
-        <h2>Shop by Category</h2>
-        <div className="categories-grid">
-          {categoryData.map((category) => (
-            <div key={category.id} className="category-item">
-              <img src={category.image} alt={category.title} />
-              <h3>{category.title}</h3>
-              <button className="shop-btn-small">VIEW ALL</button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. Trending Products Section */}
-      <section className="trending-section">
-        <h2>Trending Now</h2>
-        <div className="trending-grid">
-          {trendingData.map((product) => (
-            <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>₹{product.price}</p>
-              {/* 4. Use the function from the context */}
-              <button
-                className="add-to-cart-btn"
-                onClick={() => addToCart(featuredProduct.id)}
-              >
-                ADD TO CART
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-    </main>
+      </main>
+    </>
   );
 }

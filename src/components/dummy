@@ -1,65 +1,72 @@
 import React from 'react';
-import { FiMenu, FiSearch, FiUser, FiHeart, FiShoppingBag } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useCart } from '../pages/CartContext';
-import './Navbar.css';
+import { trendingData } from '../data/trendingData'; 
+import HeroSection from '../components/HeroSection'; 
+import { IoHeartOutline } from 'react-icons/io5'; // Import the Heart Icon
 
-function Navbar() {
+import CategoryGrid from '../components/CategoryGrid';
+import './Hero.css'; 
 
-  const { cartItemCount } = useCart();
+export default function Hero() {
+  const { addToCart } = useCart();
 
   return (
-     <nav className="navbar">
-      <div className="nav-icons">
-        {/* ... other icons ... */}
-        <Link to="/cart" className="icon-btn cart-icon">
-          <FiShoppingBag size={22} />
-          {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
-        </Link>
-      </div>
+    <>
+      <HeroSection />
 
-      {/* Left Section: Logo */}
-      <div className="navbar-left">
-        <Link to="/" className="logo-link">
-          CK
-        </Link>
-      </div>
+      <main className="homepage-content">
+        <section className="trending-section">
+          <h2 className="section-title">Trending Now</h2>
+          
+          <div className="trending-grid">
+            {trendingData.map((product) => (
+              <div key={product.id} className="product-card">
+                
+                <Link to={`/product/${product.id}`} className="product-card-link">
+                  {/* Image Container with Overlays */}
+                  <div className="product-image-container">
+                    
+                    <img src={product.image} alt={product.title} className="product-image" />
+                    
+                    {/* 1. Discount Badge (Bottom Left) */}
+                    <span className="discount-badge">40% OFF</span>
 
-      {/* Right Section: Contains links, search, and icons all together */}
-      <div className="navbar-right">
-        {/* Navigation Links */}
-        <ul className="nav-links">
-          <li><Link to="/topwear">TopWear</Link></li>
-          <li><Link to="/bottomwear">Bottomwear</Link></li>
-          <li><Link to="/athleisure">Athleisure</Link></li>
-        </ul>
+                    {/* 2. Wishlist Heart (Top Right) */}
+                    <button className="wishlist-btn" onClick={(e) => {
+                      e.preventDefault(); // Prevent clicking the link
+                      console.log('Added to wishlist');
+                    }}>
+                      <IoHeartOutline size={20} />
+                    </button>
 
-        {/* Search Bar */}
-        <div className="search-container">
-          <FiSearch className="search-icon" />
-          <input type="text" placeholder="Search" />
-        </div>
+                  </div>
+                  
+                  {/* Product Info */}
+                  <div className="product-info">
+                    <h3 className="product-title">{product.title}</h3>
+                    
+                    {/* Price Section with Strike-through */}
+                    <div className="price-row">
+                      <span className="original-price">₹{Math.floor(product.price * 1.4)}</span>
+                      <span className="sale-price">₹{product.price}</span>
+                    </div>
+                  </div>
+                </Link>
 
-        {/* Icons */}
-        <div className="nav-icons">
-          <button className="icon-btn">
-            <FiHeart size={22} />
-          </button>
-          <button className="icon-btn">
-            <FiShoppingBag size={22} />
-          </button>
-          <button className="icon-btn">
-            <FiUser size={22} />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Icon (optional, for responsive design) */}
-      <button className="icon-btn mobile-menu-btn">
-        <FiMenu size={24} />
-      </button>
-    </nav>
+                {/* Optional: Add to Cart can be hidden or minimal */}
+                {/* We will hide this by default and show on hover via CSS */}
+                <button
+                  className="add-to-cart-btn-grid"
+                  onClick={() => addToCart(product.id)}
+                >
+                  ADD TO CART
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
-
-export default Navbar;

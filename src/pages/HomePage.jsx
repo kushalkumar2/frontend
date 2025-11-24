@@ -1,41 +1,60 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // 1. Import Link
-import { useCart } from '../context/CartContext';
-import { trendingData } from '../data/trendingData';
+import { Link } from 'react-router-dom';
+import { useCart } from './CartContext'; // Ensure this points to your CartContext
+import { trendingData } from '../data/trendingData'; 
+// import HeroSection from '../components/HeroSection'; 
+
+import CategoryGrid from '../components/CategoryGrid';
 import './HomePage.css';
-// ... other imports
 
 export default function HomePage() {
   const { addToCart } = useCart();
 
   return (
-    <main className="homepage-content">
-      {/* ... other sections ... */}
-      <section className="trending-section">
-        <h2>Trending Now</h2>
-        <div className="trending-grid">
-          {trendingData.map((product) => (
-            // This is the same structure as ProductGrid.js
-            <div key={product.id} className="product-card">
-              <Link to={`/product/${product.id}`} className="product-card-link">
-                <div className="product-image-container">
-                   <img src={product.image} alt={product.title} className="product-image" />
-                </div>
-                <div className="product-info">
-                  <h3>{product.title}</h3>
-                  <p>₹{product.price}</p>
-                </div>
-              </Link>
-              <button
-                className="add-to-cart-btn-grid"
-                onClick={() => addToCart(product.id)}
-              >
-                ADD TO CART
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+    <>
+      {/* 1. NEW HERO SECTION (Replaces the Carousel) */}
+      {/* <HeroSection /> */}
+      
+      <CategoryGrid />
+
+      {/* 2. MAIN CONTENT */}
+      <main className="homepage-content">
+        
+        {/* We removed the old "Shop By Category" row to make it cleaner. 
+            The Navbar now handles navigation. */}
+
+        <section className="trending-section">
+          <h2 className="section-title">Trending Now</h2>
+          
+          <div className="trending-grid">
+            {trendingData.map((product) => (
+              <div key={product.id} className="product-card">
+                
+                {/* Clickable Card */}
+                <Link to={`/product/${product.id}`} className="product-card-link">
+                  <div className="product-image-container">
+                    <img src={product.image} alt={product.title} className="product-image" />
+                  </div>
+                  
+                  <div className="product-info">
+                    <h3 className="product-title">{product.title}</h3>
+                    <p className="product-price">₹{product.price}</p>
+                  </div>
+                </Link>
+
+                {/* Add to Cart Button */}
+                <button
+                  className="add-to-cart-btn-grid"
+                  onClick={() => addToCart(product.id)}
+                >
+                  ADD TO CART
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+      </main>
+    </>
   );
 }

@@ -1,163 +1,191 @@
-/* --- Global Styles for this component --- */
+/* Hero.css - Premium "Invisible" Grid */
+
 .homepage-content {
-  padding: 4rem 0;
-  background-color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 60px 20px;
 }
 
-h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
+/* --- HEADER SECTION --- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #eee; /* Clean divider */
+}
+
+.section-title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #111;
+  margin: 0;
+}
+
+.view-all-link {
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #666;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.view-all-link:hover {
   color: #000;
-  text-align: center;
-  margin-bottom: 3rem;
-  text-transform: uppercase;
 }
 
-/* --- Common Buttons --- */
-.shop-btn, .shop-btn-small, .add-to-cart-btn {
-  background-color: #000;
-  color: #fff;
-  border: 2px solid #000;
-  padding: 12px 30px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
+/* --- THE GRID --- */
+.trending-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 20px; /* Standard premium gap */
+}
+
+/* --- THE PRODUCT CARD --- */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  position: relative;
 }
 
-.shop-btn:hover, .shop-btn-small:hover, .add-to-cart-btn:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.shop-btn-small { padding: 8px 20px; font-size: 0.8rem; }
-
-/* --- 1 & 2. Feature Section Styling --- */
-.feature-section {
+/* --- IMAGE CONTAINER --- */
+.product-image-container {
+  width: 100%;
+  /* TALL PORTRAIT RATIO (Crucial for fashion) */
+  /* aspect-ratio: 3 / 4.2;  */
+  
+  /* INVISIBLE BACKGROUND (Images float on the page) */
+  background-color: transparent; 
+  
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  
+  /* Centering logic */
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
-  max-width: 1200px;
-  margin: 0 auto 6rem auto; /* Bottom margin to separate sections */
-  padding: 0 2rem;
 }
 
-.feature-image, .feature-text {
-  flex: 1; /* Each takes up 50% of the space */
-}
-
-.feature-image img {
+.product-image {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  
+  /* SHOW FULL PRODUCT (No zooming/cropping) */
+  object-fit: contain; 
+  
+  transition: transform 0.4s ease;
+  /* Multiplies white bg images into the page (makes white bg transparent-ish) */
+  mix-blend-mode: multiply; 
 }
 
-.feature-text h2 {
-  text-align: left;
-  font-size: 2.8rem;
-  margin-bottom: 1.5rem;
+/* Hover Zoom */
+.product-card:hover .product-image {
+  transform: scale(1.04);
 }
 
-.feature-text p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #555;
-  margin-bottom: 2rem;
+/* --- CLEAN FLOATING ICONS (No Backgrounds) --- */
+.wishlist-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  
+  /* REMOVES THE BACKGROUND CIRCLE */
+  background: transparent; 
+  border: none;
+  
+  color: #111; 
+  padding: 5px;
+  z-index: 10;
+  cursor: pointer;
 }
 
-/* This is the key for the alternating layout! */
-.feature-section.text-left {
-  flex-direction: row-reverse;
+.wishlist-btn:hover {
+  color: #d32f2f; /* Red on hover */
+  transform: scale(1.1);
 }
 
-/* --- 3. Shop by Category Section --- */
-.category-section {
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto 6rem auto;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.category-item {
-  text-align: center;
-}
-
-.category-item img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-}
-.category-item:hover img {
-    transform: scale(1.03);
-}
-
-.category-item h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+/* Discount Badge */
+.discount-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* Minimal gray badge */
+  background-color: #f5f5f5; 
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
   text-transform: uppercase;
 }
 
-/* --- 4. Trending Products Section --- */
-.trending-section {
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.trending-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-}
-
-.product-card {
+/* --- TYPOGRAPHY --- */
+.product-info {
   text-align: left;
-  background-color: #ffffff;
+  /* Align text perfectly with image edge */
+  padding: 0 4px; 
 }
 
-.product-card img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  margin-bottom: 1rem;
+.product-title {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 13px; /* Small & elegant */
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.product-card h3 {
-  font-size: 1.1rem;
+.price-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.original-price {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 12px;
+}
+
+.sale-price {
+  color: #000;
   font-weight: 600;
-  margin-bottom: 0.5rem;
 }
 
-.product-card p {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+/* Hide Add to Cart Button (Cleaner Look) */
+.add-to-cart-btn-grid {
+  display: none;
 }
 
-/* --- Mobile Responsiveness --- */
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-  .feature-section {
-    flex-direction: column !important; /* Stack on mobile, !important overrides inline style */
-    gap: 2rem;
-    margin-bottom: 4rem;
+  .trending-grid {
+    grid-template-columns: 1fr 1fr; /* 2 Columns */
+    gap: 10px; /* Tighter gap on mobile */
   }
-
-  .feature-text h2 {
-    text-align: center;
-    font-size: 2rem;
+  
+  .homepage-content {
+    padding: 0 15px 40px 15px;
   }
-  .feature-text {
-    text-align: center;
+  
+  .section-header {
+    margin-top: 40px;
+    padding-top: 20px;
+  }
+  
+  .section-title {
+    font-size: 16px;
   }
 }
