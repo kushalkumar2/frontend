@@ -1,4 +1,3 @@
-import React from 'react';
 import { topwearData } from '../data/topwearData';
 import ProductGrid from '../components/ProductGrid';
 

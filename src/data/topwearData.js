@@ -1,6 +1,12 @@
 export const topwearData = [
-  { id: 'top1', image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1974', title: 'Classic Black Tee', category: 'topwear', subcategory: 'shirt', price: 799 },
-  { id: 'top2', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1964', title: 'Striped Crewneck',category: 'topwear', subcategory: 'shirt', price: 1199 },
+  { id: 'top1', image: 'https://www.beyours.in/cdn/shop/files/black-classic-shirt.jpg?v=1744815740&width=900', title: 'Classic Black shirt', category: 'topwear', subcategory: 'shirt', price: 1599 },
+  { id: 'top2', image: 'https://in.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-monogram-flannel-long-sleeved-polo-shirt--HUS33WWLE130_PM2_Front%20view.jpg', title: 'Striped Crewneck',category: 'topwear', subcategory: 'shirt', price: 1199 },
   { id: 'top3', image: 'https://image.hm.com/assets/hm/59/8f/598fa0c8560b84976d38240e6e1c2c0ccae792e1.jpg?imwidth=1260', title: 'White Polo Shirt',category: 'topwear', subcategory: 'tshirt', price: 1499 },
   { id: 'top4', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1974', title: 'Plain White Tee',category: 'topwear', subcategory: 'tshirt', price: 699 },
+  { id: 'top5', image: 'https://teelabs.in/wp-content/uploads/2021/02/polo-red-and-white-5.png', title: 'Red White Tee',category: 'topwear', subcategory: 'tshirt', price:499},
+  { id: 'top6', image: 'https://ramrajcotton.in/cdn/shop/files/1_f318c0ca-ea45-4406-8bd0-ce74bd12e64d.jpg?v=1752563910&width=1000', title: 'Navy with Brown(Brunette)',category: 'topwear', subcategory: 'tshirt', price: 995 },
+  { id: 'top7', image: 'https://www.simplikurta.com/cdn/shop/files/21_4_-Photoroom.png?v=1723101349', title: 'Long Sleeve Navy Blue',category: 'topwear', subcategory: 'shirt', price: 999 },
+  { id: 'top8', image: 'https://cottonfolk.in/cdn/shop/files/Men_sBrownPinstripeShort-SleeveShirt.jpg?v=1732268509&width=800', title: 'Brown Pinstripe Short',category: 'topwear', subcategory: 'shirt', price: 999 },
+  { id: 'top9', image: 'https://ae01.alicdn.com/kf/H14daed24842b4255bff7dbe0e1d17fbfe.jpg', title: 'white & Blue full sleeve',category: 'topwear', subcategory: 'shirt', price: 2999 },
+  { id: 'top10', image:'https://www.jiomart.com/images/product/original/rvstqohmgm/eyebogler-teal-tshirts-men-tshirt-tshirt-for-men-tshirt-mens-tshirt-men-s-polo-neck-regular-fit-half-sleeves-colorblocked-t-shirt-product-images-rvstqohmgm-1-202504231102.jpg?im=Resize=(500,630)', title: 'EyeBogler Teal Tshirts',category: 'topwear', subcategory: 'tshirt', price: 599 },
 ];

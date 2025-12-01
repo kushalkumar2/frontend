@@ -3,6 +3,7 @@ import { bottomwearData } from './bottomwearData';
 import { athleisureData } from './athleisureData';
 import { trendingData } from './trendingData';
 
+
 // Combine all arrays into one
 const combinedData = [
   ...topwearData,
