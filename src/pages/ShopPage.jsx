@@ -20,7 +20,7 @@ const ShopPage = ({ baseCategory }) => {
 
     // 2. Filter by Subcategory (e.g., 'shirts') from URL
     if (subcategory) {
-      filtered = filtered.filter(p => p.subCategory === subcategory);
+      filtered = filtered.filter(p => p.subcategory === subcategory);
     }
 
     setProducts(filtered);

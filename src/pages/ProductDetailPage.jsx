@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from './CartContext'; 
-import { trendingData } from '../data/trendingData'; // Or allProducts if you have it
+// import { trendingData } from '../data/trendingData'; // Or allProducts if you have it
+
+import { allProducts } from '../data/allProducts';
 import { IoStar, IoStarOutline, IoChevronDownOutline, IoChevronUpOutline } from 'react-icons/io5';
 import './ProductDetailPage.css';
+
+import { useWishlist } from "./WishlistContext";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
+
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
+
+  const { toggleWishlist, isWishlisted } = useWishlist();
+
   
   // States for UI
   const [selectedSize, setSelectedSize] = useState(null);
@@ -21,7 +30,8 @@ const ProductDetailPage = () => {
   useEffect(() => {
     // Search in your data source. 
     // If you have 'allProducts', import that instead of trendingData
-    const found = trendingData.find(p => p.id === productId || p.id === parseInt(productId));
+    // const found = trendingData.find(p => p.id === productId || p.id === parseInt(productId));
+    const found = allProducts.find(p => p.id === productId);
     setProduct(found);
   }, [productId]);
 
@@ -88,14 +98,29 @@ const ProductDetailPage = () => {
             className="add-to-cart-btn-pdp"
             onClick={() => {
               if(!selectedSize) alert('Please select a size');
-              else addToCart(product.id);
+              else addToCart(product.id, selectedSize);
             }}
           >
             ADD TO BAG
           </button>
-          <button className="wishlist-btn-pdp">
+          {/* <button className="wishlist-btn-pdp">
             Save to Wishlist
-          </button>
+          </button> */}
+          
+        <button
+          className="wishlist-btn-pdp"
+          onClick={() => toggleWishlist(product)}
+        >
+        {isWishlisted(product.id) ? (
+        <IoHeart size={22} color="red" />
+        ) : (
+        <IoHeartOutline size={22} />
+        )}
+        &nbsp; Save to Wishlist
+        </button>
+
+
+
         </div>
 
         {/* Accordions (Collapsible Info) */}

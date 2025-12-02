@@ -2,10 +2,15 @@ import React from 'react';
 import { useCart } from '../pages/CartContext';
 import { Link } from 'react-router-dom'; // 1. Import Link
 import './ProductGrid.css';
+import { useWishlist } from "../pages/WishlistContext";
+import { IoHeartOutline, IoHeart } from "react-icons/io5";
+
 
 // This component displays a single product card
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const { toggleWishlist, isWishlisted } = useWishlist();
+
 
   return (
     <div className="product-card">
@@ -14,6 +19,20 @@ function ProductCard({ product }) {
         <div className="product-image-container">
           <img src={product.image} alt={product.title} className="product-image" />
         </div>
+        <button
+          className="wishlist-btn-grid"
+          onClick={(e) => {
+          e.preventDefault();
+          toggleWishlist(product);
+       }}
+       >
+       {isWishlisted(product.id) ? (
+         <IoHeart color="red" size={22} />
+         ) : (
+            <IoHeartOutline size={22} />
+         )}  
+       </button>
+
         <div className="product-info">
           <h3 className="product-title">{product.title}</h3>
           <p className="product-price">₹{product.price}</p>

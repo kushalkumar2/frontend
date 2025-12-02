@@ -4,6 +4,7 @@ import Hero from './pages/Hero';
 import HeroCarousel from './components/HeroCarousel';
 // Navbar is removed from here because it is in Layout.jsx now!
 import { Routes, Route } from "react-router-dom";
+import { WishlistProvider } from "./pages/WishlistContext";
 import { CartProvider } from "./pages/CartContext";
 import { AuthProvider } from "./pages/AuthContext";
 import TopWearPage from "./pages/TopWearPage";
@@ -19,6 +20,16 @@ import ComingSoon from "./pages/ComingSoon";
 import Tshirts from "./pages/Tshirt";
 import ShopPage from "./pages/ShopPage";
 import Shirts from "./pages/Shirts";
+import WishlistPage from "./pages/WishListPage";
+import LoginPage from "./pages/LoginPage";
+
+import AdminLayout from "./admin/AdminLayout";
+import AdminProtected from "./admin/AdminProtected";
+import Dashboard from "./admin/Dashboard";
+import ManageProducts from "./admin/ManageProducts";
+import ManageOrders from "./admin/ManageOrders";
+import ManageUsers from "./admin/ManageUsers";
+
 
 function App(){
   return(
@@ -26,8 +37,11 @@ function App(){
     <div className="App">
       <AuthProvider>
         <CartProvider>
-        
-      <Routes>
+        <WishlistProvider>
+
+          <Routes>
+
+            <Route path="login" element={<LoginPage />} />
         {/* THE MAIN WRAPPER: All these pages will have the Navbar automatically */}
         <Route path="/" element={<Layout />}>
 
@@ -48,11 +62,16 @@ function App(){
 
             <Route path="product/:productId" element={<ProductDetailPage />} />
 
+            <Route path=":category/:subcategory?" element={<ShopPage />} />
+
             <Route path="cart" element={<CartPage />} />
-            <Route path="men/topwear/t-shirts" element={<Tshirts />} />
-            <Route path="men/topwear/shirts" element={<Shirts />} />
+            <Route path="topwear/t-shirts" element={<Tshirts />} />
+            <Route path="topwear/shirts" element={<Shirts />} />
             <Route path="bottomwear/jeans" element={<JeansPage />} />
             <Route path="bottomwear/pants" element={<PantsPage />} />
+
+            <Route path="/wishlist" element={<WishlistPage />} />
+
 
         </Route> 
         {/* End of the Wrapper */}
@@ -60,7 +79,17 @@ function App(){
         {/* Login is OUTSIDE the wrapper because you usually don't want a Navbar on the login screen */}
         <Route path="/login" element={<AuthModal />} />
 
+        <Route path="/admin" element={<AdminProtected><AdminLayout /></AdminProtected>}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="products" element={<ManageProducts />} />
+          <Route path="orders" element={<ManageOrders />} />
+          <Route path="users" element={<ManageUsers />} />
+       </Route>
+
+
+
       </Routes>
+        </WishlistProvider>
       </CartProvider>
       </AuthProvider>
     </div>

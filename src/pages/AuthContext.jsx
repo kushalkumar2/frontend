@@ -1,55 +1,46 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import AuthModal from '../components/AuthModal';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
+export const useAuth = () => useContext(AuthContext);
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
 
-export function AuthProvider({ children }) {
-  // 1. Initialize state by reading from localStorage
-  const [currentUser, setCurrentUser] = useState(localStorage.getItem('currentUser') || null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-
-  // 2. Add an effect that syncs localStorage whenever currentUser changes
+  // Persist login
   useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem('currentUser', currentUser);
-    } else {
-      localStorage.removeItem('currentUser');
+    if (user) localStorage.setItem("user", JSON.stringify(user));
+    else localStorage.removeItem("user");
+  }, [user]);
+
+  // COMPLETE WORKING ADMIN + USER LOGIN LOGIC
+  const login = ({ email, password }) => {
+    // ADMIN LOGIN
+    if (email === "admin@test.com" && password === "admin123") {
+      const adminUser = { email, role: "admin" };
+      setUser(adminUser);
+      return { success: true, role: "admin" };
     }
-  }, [currentUser]);
 
-  const openAuthModal = () => setIsAuthModalOpen(true);
-  const closeAuthModal = () => setIsAuthModalOpen(false);
+    // NORMAL USER LOGIN
+    if (email === "test@gmail.com" && password === "123456") {
+      const normalUser = { email, role: "user" };
+      setUser(normalUser);
+      return { success: true, role: "user" };
+    }
 
-  // 3. This function is now perfect. It sets the state, and the useEffect handles localStorage.
-  const handleLoginSuccess = (userName) => {
-    setCurrentUser(userName);
+    return { success: false, message: "Invalid Credentials" };
   };
 
-  // 4. This logout function is also now perfect.
   const logout = () => {
-    setCurrentUser(null);
-  };
-
-  const value = {
-    isLoggedIn: !!currentUser,
-    currentUser,
-    openAuthModal,
-    logout,
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
-      {isAuthModalOpen && (
-        <AuthModal
-          closeModal={closeAuthModal}
-          onLoginSuccess={handleLoginSuccess}
-        />
-      )}
     </AuthContext.Provider>
   );
-}
+};

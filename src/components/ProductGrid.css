@@ -95,3 +95,20 @@
   color: #fff;
   border-color: #000; /* Border becomes black on hover */
 }
+
+.wishlist-btn-grid {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 5;
+}
