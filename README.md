@@ -1,18 +1,40 @@
 # Ck-chv
 An e-commerce platform based on react
-# React + Vite
+A modern, responsive frontend e-commerce website built with clean UI, reusable components, and intuitive user flow. This project focuses on product listing, filtering, cart management, and a smooth shopping experience — all implemented using only frontend technologies.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Features
+🧩 Core Features
 
-Currently, two official plugins are available:
+Home Page with banners/categories
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Product Listing Page (grid, sorting, filters)
 
-## React Compiler
+Product Details Page (image, description, price, reviews)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Cart Page with add/remove/update quantity
 
-## Expanding the ESLint configuration
+Wishlist Support (optional but recommended)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Search Functionality (instant or submit-based)
+
+Responsive Design for mobile, tablet, desktop
+
+🎨 UI/UX
+
+Clean and modern layout
+
+Fully responsive
+
+Hover effects & micro animations
+
+Error states, empty states, and loading skeletons
+
+🧠 Optional Enhancements
+
+Dark Mode
+
+Pagination or infinite scroll
+
+Toast notifications
+
+LocalStorage persistence (cart & wishlist saved even after reload)
