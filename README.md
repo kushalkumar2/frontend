@@ -1,40 +1,70 @@
 # Ck-chv
-An e-commerce platform based on react
-A modern, responsive frontend e-commerce website built with clean UI, reusable components, and intuitive user flow. This project focuses on product listing, filtering, cart management, and a smooth shopping experience — all implemented using only frontend technologies.
+E-Commerce Frontend (React)
+A modern, fully responsive React-based e-commerce frontend featuring product listings, details, cart functionality, and LocalStorage persistence. Built with clean UI, reusable components, and a smooth user experience.
 
-🚀 Features
-🧩 Core Features
+ Features
+🧩 Core Functionality
 
-Home Page with banners/categories
+Home Page with categories & featured products
 
-Product Listing Page (grid, sorting, filters)
+Product Listing Page with:
 
-Product Details Page (image, description, price, reviews)
+Sorting
 
-Cart Page with add/remove/update quantity
+Search bar
 
-Wishlist Support (optional but recommended)
+Product Details Page (images, rating, description, price)
 
-Search Functionality (instant or submit-based)
+Cart Page
 
-Responsive Design for mobile, tablet, desktop
+Add / remove products
 
-🎨 UI/UX
+Update quantity
 
-Clean and modern layout
+Auto-calculated totals
 
-Fully responsive
+Wishlist (Optional)
 
-Hover effects & micro animations
+Responsive Layout (mobile → desktop)
 
-Error states, empty states, and loading skeletons
+🧠 State & Data Handling
 
-🧠 Optional Enhancements
+LocalStorage used for:
 
-Dark Mode
+Cart persistence
 
-Pagination or infinite scroll
+Wishlist persistence
 
-Toast notifications
+User session cache
 
-LocalStorage persistence (cart & wishlist saved even after reload)
+React Hooks for managing component state
+
+Mock data (JSON) as API substitute
+
+🎨 UI / Styling
+
+Built with CSS (modular CSS / plain CSS)
+
+Consistent theme, spacing, and typography
+
+Reusable components like:
+
+Button
+
+ProductCard
+
+Navbar
+
+Footer
+
+🛠️ Tech Stack
+
+React (Vite)
+
+JavaScript (ES6+)
+
+CSS3
+
+LocalStorage API
+
+Mock JSON data
