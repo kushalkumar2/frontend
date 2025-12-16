@@ -1,0 +1,22 @@
+.mainreg{
+       width: 100vw;
+       height: 100vh;
+      background-color: rgb(235, 248, 252);
+      display: flex;
+     justify-content: center; 
+     align-items: center;    
+       
+}
+.reg{
+    width: 39%;
+    height: 90%;
+    border: 2px solid rgb(38, 18, 173);
+    box-shadow: 2px;
+}
+/* imput{
+        border: 2px solid black;
+    box-shadow: 2px;
+
+} */
+label{
+}

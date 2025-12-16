@@ -1,0 +1,36 @@
+.allusers-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.allusers-container h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.allusers-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 70%;
+  font-size: 16px;
+}
+
+.allusers-table th,
+.allusers-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.allusers-table th {
+  background-color: #4a90e2;
+  color: white;
+  text-align: center;
+}
+
+.allusers-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.allusers-table tr:hover {
+  background-color: #e6f2ff;
+}
