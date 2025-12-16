@@ -20,7 +20,7 @@ import ComingSoon from "./pages/ComingSoon";
 import Tshirts from "./pages/Tshirt";
 import ShopPage from "./pages/ShopPage";
 import Shirts from "./pages/Shirts";
-import WishlistPage from "./pages/WishListPage";
+import WishlistPage from "./pages/WishlistPage";
 import LoginPage from "./pages/LoginPage";
 
 import AdminLayout from "./admin/AdminLayout";
